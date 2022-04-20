@@ -23,7 +23,7 @@ saaeac <-
 #--------------------------------------------------------------------------------------
 
 ## 2) load occupancy data ##------------------------------------------------------
-occupancy <- read_csv("./2.data_cleaned/NHM-MZUSP_dist2edge_data.csv")%>%
+occupancy <- read_csv("./FA_FC_final.csv")%>%
   # transform coordinate columns into simple features (WGS84 projection)
   st_as_sf(
     coords = c('lon_dd', 'lat_dd'),
@@ -45,10 +45,19 @@ occupancy_subset <- occupancy %>%
 map_brazil <-
   st_read("./2.data_raw/other_map_files/Estados_Brasil.shp")
 
+map_biomes <-
+  st_read("./2.data_raw/other_map_files/Biomas_Brasil.shp") %>%
+  mutate(NOME = as.factor(NOME)) %>%
+  st_transform(crs = 4326)
+
+
  p <-ggplot() +
   geom_sf(data = map_brazil,
           fill = "lightsteelblue2",
           color = "lightsteelblue4") +
+  geom_sf(data = map_biomes,
+          aes(fill = NOMES),
+          alpha = 0.5)+
   geom_sf(data = occupancy_subset,
           aes(shape = is_fgb),
           size = 2) +

@@ -70,13 +70,11 @@ data <- data %>%
   mutate(side = substring(type,1,1), type = substring(type,2,2)) %>%
   # transforms this rows from 'side' into columns
   pivot_wider(names_from = side, values_from = c(mean,sd)) %>%
-  # calculate FA by subtracting one side from the other. By keeping the sign, I will know which side is bigger (that does not 
-  # matter for me atm, because I am only interested in the abs diff, but if I ever think about looking at directional asymmetry I 
-  # will have this. Also because I might need it to make sure the data is robust enough using this in some more analysis - so for the SI)
+  # calculate FA by subtracting one side from the other. By keeping the sign, I will know which side is bigger.
   mutate(fa_left_right = mean_l-mean_r) %>%
   # calculate FA ratio between sites
   mutate(fa_ratio = mean_l/mean_r) %>%
-  # here I calculate FA effectively, as it is the non-directional asymmetry between bilateral traits. 
+  # here I calculate the absolute FA, as it is the non-directional asymmetry between bilateral traits. 
   mutate(fa_abs_mm = abs(fa_left_right)) %>%
   # remove columns that are not needed now
   dplyr::select(-c(location, feather_tail))

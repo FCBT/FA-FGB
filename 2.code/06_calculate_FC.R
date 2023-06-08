@@ -56,7 +56,7 @@ data <- data %>%
   relocate(decade, .after = date_collected)
 
 map_brazil <-
-  st_read("./2.data_raw/other_map_files/Biomas_Brasil.shp") %>%
+  st_read("/Users/flavia/Library/CloudStorage/OneDrive-ImperialCollegeLondon/1.PHD/2.R-dir/shared_maps_berween_chapters/other_map_files/Biomas_Brasil.shp") %>%
   mutate(NOME = as.factor(NOME)) %>%
   st_transform(crs = 4326)
 

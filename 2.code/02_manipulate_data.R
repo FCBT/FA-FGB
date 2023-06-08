@@ -94,7 +94,7 @@ table(data$source)
 ## Xenops rutilus in the range map; Xenops rutilans in mzusp dataframe
 ## Hylatomus lineatus in the range map; Dryocopus lineatus in mzusp dataframe
 
-# replace lat= -28 by -23
+# replace names
 data <- data %>%  
   mutate(species = ifelse((species == "Xenops rutilans"), "Xenops rutilus", species)) %>%
   mutate(species = ifelse((species == "Dryocopus lineatus"), "Hylatomus lineatus", species))

@@ -1,4 +1,4 @@
-# use this script to fit model in terminal, which is quicker.
+# use this script to fit model in terminal, which is quicker - see notebook for more details.
 library(tidyverse)
 library(brms)
 
